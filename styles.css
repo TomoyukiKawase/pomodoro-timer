@@ -1,0 +1,360 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    min-height: 100vh;
+    color: #333;
+    line-height: 1.6;
+}
+
+.container {
+    max-width: 600px;
+    margin: 0 auto;
+    padding: 2rem;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+header {
+    text-align: center;
+    margin-bottom: 3rem;
+}
+
+header h1 {
+    font-size: 2.5rem;
+    font-weight: 700;
+    color: white;
+    margin-bottom: 0.5rem;
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.subtitle {
+    color: rgba(255, 255, 255, 0.8);
+    font-size: 1.1rem;
+    font-weight: 300;
+}
+
+.timer-container {
+    background: white;
+    border-radius: 20px;
+    padding: 3rem 2rem;
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+    margin-bottom: 2rem;
+    text-align: center;
+}
+
+.timer-display {
+    margin-bottom: 2rem;
+}
+
+.time {
+    font-size: 4rem;
+    font-weight: 700;
+    color: #2d3748;
+    margin-bottom: 0.5rem;
+    font-family: 'Courier New', monospace;
+}
+
+.phase {
+    font-size: 1.2rem;
+    color: #718096;
+    font-weight: 500;
+}
+
+.controls {
+    display: flex;
+    gap: 1rem;
+    justify-content: center;
+    margin-bottom: 2rem;
+    flex-wrap: wrap;
+}
+
+.btn {
+    padding: 0.75rem 1.5rem;
+    border: none;
+    border-radius: 10px;
+    font-size: 1rem;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    min-width: 120px;
+}
+
+.btn:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+}
+
+.btn-primary {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+}
+
+.btn-primary:hover:not(:disabled) {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 20px rgba(102, 126, 234, 0.4);
+}
+
+.btn-secondary {
+    background: #f7fafc;
+    color: #4a5568;
+    border: 2px solid #e2e8f0;
+}
+
+.btn-secondary:hover:not(:disabled) {
+    background: #edf2f7;
+    transform: translateY(-1px);
+}
+
+.progress-container {
+    margin-top: 1rem;
+}
+
+.progress-bar {
+    width: 100%;
+    height: 8px;
+    background: #e2e8f0;
+    border-radius: 4px;
+    overflow: hidden;
+}
+
+.progress-fill {
+    height: 100%;
+    background: linear-gradient(90deg, #667eea 0%, #764ba2 100%);
+    width: 0%;
+    transition: width 0.3s ease;
+}
+
+.settings {
+    background: white;
+    border-radius: 15px;
+    padding: 2rem;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+    margin-bottom: 2rem;
+}
+
+.settings h3 {
+    color: #2d3748;
+    margin-bottom: 1.5rem;
+    font-size: 1.3rem;
+    font-weight: 600;
+}
+
+.setting-group {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1rem;
+    padding: 0.5rem 0;
+}
+
+.setting-group label {
+    font-weight: 500;
+    color: #4a5568;
+}
+
+.setting-group input {
+    width: 80px;
+    padding: 0.5rem;
+    border: 2px solid #e2e8f0;
+    border-radius: 8px;
+    text-align: center;
+    font-size: 1rem;
+    transition: border-color 0.3s ease;
+}
+
+.setting-group input:focus {
+    outline: none;
+    border-color: #667eea;
+}
+
+.stats {
+    background: white;
+    border-radius: 15px;
+    padding: 2rem;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+}
+
+.stat-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem 0;
+    border-bottom: 1px solid #f7fafc;
+}
+
+.stat-item:last-child {
+    border-bottom: none;
+}
+
+.stat-label {
+    color: #4a5568;
+    font-weight: 500;
+}
+
+.stat-value {
+    color: #2d3748;
+    font-weight: 600;
+    font-size: 1.1rem;
+}
+
+.notification {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    background: white;
+    border-radius: 10px;
+    padding: 1rem 1.5rem;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+    transform: translateX(400px);
+    transition: transform 0.3s ease;
+    z-index: 1000;
+    max-width: 300px;
+}
+
+.notification.show {
+    transform: translateX(0);
+}
+
+.notification-content {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+#notification-close {
+    background: none;
+    border: none;
+    font-size: 1.5rem;
+    cursor: pointer;
+    color: #718096;
+    padding: 0;
+    width: 24px;
+    height: 24px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    transition: background-color 0.3s ease;
+}
+
+#notification-close:hover {
+    background: #f7fafc;
+}
+
+/* レスポンシブデザイン */
+@media (max-width: 768px) {
+    .container {
+        padding: 1rem;
+    }
+    
+    header h1 {
+        font-size: 2rem;
+    }
+    
+    .time {
+        font-size: 3rem;
+    }
+    
+    .controls {
+        flex-direction: column;
+        align-items: center;
+    }
+    
+    .btn {
+        width: 200px;
+    }
+    
+    .setting-group {
+        flex-direction: column;
+        gap: 0.5rem;
+        align-items: flex-start;
+    }
+    
+    .setting-group input {
+        width: 100px;
+    }
+    
+    .notification {
+        right: 10px;
+        left: 10px;
+        max-width: none;
+    }
+}
+
+/* アニメーション */
+@keyframes pulse {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.05); }
+    100% { transform: scale(1); }
+}
+
+.timer-display.working .time {
+    animation: pulse 2s infinite;
+}
+
+/* ダークモード対応 */
+@media (prefers-color-scheme: dark) {
+    body {
+        background: linear-gradient(135deg, #1a202c 0%, #2d3748 100%);
+    }
+    
+    .timer-container,
+    .settings,
+    .stats {
+        background: #2d3748;
+        color: white;
+    }
+    
+    .time {
+        color: white;
+    }
+    
+    .phase {
+        color: #a0aec0;
+    }
+    
+    .btn-secondary {
+        background: #4a5568;
+        color: white;
+        border-color: #718096;
+    }
+    
+    .btn-secondary:hover:not(:disabled) {
+        background: #718096;
+    }
+    
+    .setting-group label {
+        color: #e2e8f0;
+    }
+    
+    .setting-group input {
+        background: #4a5568;
+        color: white;
+        border-color: #718096;
+    }
+    
+    .setting-group input:focus {
+        border-color: #667eea;
+    }
+    
+    .stat-label {
+        color: #a0aec0;
+    }
+    
+    .stat-value {
+        color: white;
+    }
+    
+    .notification {
+        background: #2d3748;
+        color: white;
+    }
+} 
